@@ -4,7 +4,7 @@ var initializeConnection = require('../config/db');
 var app = express();
 var cors = require('cors');
 app.use(cors()); 
-app.use(express.json());
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -116,7 +116,7 @@ router.post('/create', async (req, res) => {
 
 //Inicio de sesion
 
-app.post('/Login', async (req, res) => {
+router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
   
   try {
