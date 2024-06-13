@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
-
+const  app = express();
+const  cors = require('cors');
+app.use(cors()); 
+app.use(express.json());
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
