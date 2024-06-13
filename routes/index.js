@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
-router.use(bodyParser.json()); // Middleware para analizar solicitudes JSON
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(express.json());
+
+// Middleware para analizar solicitudes URL-encoded
+router.use(express.urlencoded({ extended: true }));
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
