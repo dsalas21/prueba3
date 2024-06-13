@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
-var  app = express();
-var  cors = require('cors');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -116,7 +114,7 @@ router.post('/create', async (req, res) => {
 
 router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
-  const connection = await initializeConnection();
+  
   try {
     // busqueda del email
     const connection = await initializeConnection();
