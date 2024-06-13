@@ -139,7 +139,7 @@ router.post('/Login', async (req, res) => {
 
     res.send('Inicio de sesión exitoso');
   } catch (err) {
-    res.status(500).send('Error en el servidor');
+    res.status(500).send('Error en el servidor', err.message);
   }
 });
 
