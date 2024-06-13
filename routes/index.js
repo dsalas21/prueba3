@@ -90,7 +90,7 @@ router.delete("/borrarPlanta/:id", async (req, res) => {
 });
 
 
-app.post('/create', async (req, res) => {
+router.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
   
   try {
@@ -112,7 +112,7 @@ app.post('/create', async (req, res) => {
 
 //Inicio de sesion
 
-app.post('/Login', async (req, res) => {
+router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
   
   try {
