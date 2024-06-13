@@ -1,7 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
+var initializeConnection = require('../config/db'); 
 var app = express();
+
+app.use(cors()); 
+app.use(express.json());
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -112,7 +116,7 @@ router.post('/create', async (req, res) => {
 
 //Inicio de sesion
 
-router.post('/Login', async (req, res) => {
+app.post('/Login', async (req, res) => {
   const { email, password } = req.body;
   
   try {
