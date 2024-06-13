@@ -115,7 +115,7 @@ router.post('/create', async (req, res) => {
 
 //Inicio de sesion
 
-router.post('/Login', async (req, res) => {
+app.post('/Login', async (req, res) => {
   const { email, password } = req.body;
   const connection = await initializeConnection();
   try {
