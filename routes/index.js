@@ -164,7 +164,7 @@ router.post("/regR", async (req, res) => {
     const query = 'INSERT INTO Recolectores (name, state, country, city) VALUES (?, ?, ?, ?)';
     const values = [name, state, country, city];
 
-    const [result] = await connection.promise().query(query, values);
+    const [result] = await connection.query(query, values);
     res.send('Recolector registrado exitosamente');
   } catch (err) {
     console.log('Error al insertar datos:', err);
