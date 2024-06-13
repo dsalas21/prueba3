@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
 var cors = require('cors');
+var bcrypt = require('bcrypt');
+
 router.use(express.json());
 router.use(cors());
 // Middleware para analizar solicitudes URL-encoded
