@@ -108,7 +108,7 @@ router.post('/create', async (req, res) => {
 
     res.status(201).json({ status: 201, message: 'Usuario registrado exitosamente', data: result });
   } catch (err) {
-    res.status(500).json({ status: 500, message: 'Error al registrar el usuario', error: err.message });
+    res.status(500).json({ status: 500, message: 'Error al registrar el usuario', error: err });
   }
 });
 
@@ -117,7 +117,7 @@ router.post('/create', async (req, res) => {
 
 router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
-  const connection = await initializeConnection();
+
   try {
     // busqueda del email
     const connection = await initializeConnection();
@@ -139,7 +139,7 @@ router.post('/Login', async (req, res) => {
 
     res.send('Inicio de sesión exitoso');
   } catch (err) {
-    res.status(500).send('Error en el servidor', err.message);
+    res.status(500).send('Error en el servidor' );
   }
 });
 
