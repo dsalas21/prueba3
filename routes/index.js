@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
-
+router.use(bodyParser.json()); // Middleware para analizar solicitudes JSON
+router.use(bodyParser.urlencoded({ extended: true }));
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -92,12 +93,13 @@ router.delete("/borrarPlanta/:id", async (req, res) => {
 
 router.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
-  
+
   try {
-    // Función para encriptar contraseña
-    const connection = await initializeConnection();
+    // Encriptar la contraseña
     const hash = await bcrypt.hash(password, 10);
 
+    // Insertar usuario en la base de datos
+    const connection = await initializeConnection();
     const [result] = await connection.query(
       'INSERT INTO Usuarios (name, email, password) VALUES (?, ?, ?)',
       [name, email, hash]
@@ -105,16 +107,16 @@ router.post('/create', async (req, res) => {
 
     res.status(201).json({ status: 201, message: 'Usuario registrado exitosamente', data: result });
   } catch (err) {
+    console.error('Error al registrar el usuario:', err);
     res.status(500).json({ status: 500, message: 'Error al registrar el usuario', error: err.message });
   }
 });
-
 
 //Inicio de sesion
 
 router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
-  const connection = await initializeConnection();
+  
   try {
     // busqueda del email
     const connection = await initializeConnection();
