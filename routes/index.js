@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); // Asegúrate de que la ruta es correcta
-//var  app = express();
+var  app = express();
 var  cors = require('cors');
-router.use(cors()); 
-router.use(express.json());
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -108,7 +107,7 @@ router.post('/create', async (req, res) => {
 
     res.status(201).json({ status: 201, message: 'Usuario registrado exitosamente', data: result });
   } catch (err) {
-    res.status(500).json({ status: 500, message: 'Error al registrar el usuario', error: err });
+    res.status(500).json({ status: 500, message: 'Error al registrar el usuario', error: err.message });
   }
 });
 
@@ -117,7 +116,7 @@ router.post('/create', async (req, res) => {
 
 router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
-
+  const connection = await initializeConnection();
   try {
     // busqueda del email
     const connection = await initializeConnection();
@@ -139,7 +138,7 @@ router.post('/Login', async (req, res) => {
 
     res.send('Inicio de sesión exitoso');
   } catch (err) {
-    res.status(500).send('Error en el servidor' );
+    res.status(500).send('Error en el servidor');
   }
 });
 
