@@ -56,7 +56,7 @@ router.get("/Plantas/:id", async (req, res) => {
 
   try {
     const connection = await initializeConnection();
-    const [result] = await connection.promise().query('SELECT * FROM Plantas WHERE id = ?', [id]);
+    const [result] = await connection.query('SELECT * FROM Plantas WHERE id = ?', [id]);
     
     if (result.length > 0) {
       res.send(result[0]); 
