@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var initializeConnection = require('../config/db'); 
 var app = express();
-
+var cors = require('cors');
 app.use(cors()); 
 app.use(express.json());
 
