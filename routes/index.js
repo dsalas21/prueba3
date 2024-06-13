@@ -76,7 +76,7 @@ router.delete("/borrarPlanta/:id", async (req, res) => {
 
   try {
     const connection = await initializeConnection();
-    const [result] = await connection.promise().query('DELETE FROM Plantas WHERE id = ?', [id]);
+    const [result] = await connection.query('DELETE FROM Plantas WHERE id = ?', [id]);
     
     if (result.affectedRows > 0) {
       res.send('Planta borrada exitosamente');
@@ -118,7 +118,7 @@ router.post('/Login', async (req, res) => {
   try {
     // busqueda del email
     const connection = await initializeConnection();
-    const [results] = await connection.promise().query('SELECT * FROM Usuarios WHERE email = ?', [email]);
+    const [results] = await connection.query('SELECT * FROM Usuarios WHERE email = ?', [email]);
 
     if (results.length === 0) {
       res.status(401).send('Usuario no encontrado');
@@ -187,7 +187,7 @@ router.post("/regP", async (req, res) => {
     const query = 'INSERT INTO Plantas (scientific_name, common_name, family, genus, species, description, habitat, location, image, collection_date, recolector_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [scientific_name, common_name, family, genus, species, description, habitat, location, image, collection_date, recolector_id];
 
-    const [result] = await connection.promise().query(query, values);
+    const [result] = await connection.query(query, values);
     res.send('Planta registrada exitosamente');
   } catch (err) {
     console.log('Error al insertar datos:', err);
@@ -217,7 +217,7 @@ router.post("/PlantasUp/:id", async (req, res) => {
 
   try {
     const connection = await initializeConnection();
-    const [result] = await connection.promise().query(query, [scientific_name, common_name, family, genus, species, description, habitat, location, image, collection_date, recolector_id, id]);
+    const [result] = await connection.query(query, [scientific_name, common_name, family, genus, species, description, habitat, location, image, collection_date, recolector_id, id]);
     res.send('Planta actualizada exitosamente');
   } catch (err) {
     console.log('Error al actualizar datos:', err);
@@ -225,6 +225,22 @@ router.post("/PlantasUp/:id", async (req, res) => {
   }
 });
 
+router.get("/Recolectores/:id", async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    const connection = await initializeConnection();
+    const [result] = await connection.query('SELECT * FROM Recolectores WHERE id = ?', [id]);
+    
+    if (result.length > 0) {
+      res.send(result[0]); 
+    } else {
+      res.status(404).send('Recolectores no encontrada'); 
+    }
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).send('Error al obtener la Recolector');
+  }
+});
 
 module.exports = router;
