@@ -51,7 +51,7 @@ router.get('/Plantas', async function(req, res, next) {
 
 
 
-app.get("/Plantas/:id", async (req, res) => {
+router.get("/Plantas/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -71,7 +71,7 @@ app.get("/Plantas/:id", async (req, res) => {
 
 //borrar plantas
 
-app.delete("/borrarPlanta/:id", async (req, res) => {
+router.delete("/borrarPlanta/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -90,7 +90,7 @@ app.delete("/borrarPlanta/:id", async (req, res) => {
 });
 
 
-app.post('/create', async (req, res) => {
+router.post('/create', async (req, res) => {
   const { name, email, password } = req.body;
   
   try {
@@ -112,7 +112,7 @@ app.post('/create', async (req, res) => {
 
 //Inicio de sesion
 
-app.post('/Login', async (req, res) => {
+router.post('/Login', async (req, res) => {
   const { email, password } = req.body;
   const connection = await initializeConnection();
   try {
@@ -148,7 +148,7 @@ app.post('/Login', async (req, res) => {
 //Registrar Recolectores
 
 
-app.post("/regR", async (req, res) => {
+router.post("/regR", async (req, res) => {
   const { name, state, country, city } = req.body;
 
   try {
@@ -167,7 +167,7 @@ app.post("/regR", async (req, res) => {
 
 //registrar Planta
 
-app.post("/regP", async (req, res) => {
+router.post("/regP", async (req, res) => {
   const {
     scientific_name,
     common_name,
@@ -197,7 +197,7 @@ app.post("/regP", async (req, res) => {
 
 
 //Actualizar planta
-app.post("/PlantasUp/:id", async (req, res) => {
+router.post("/PlantasUp/:id", async (req, res) => {
   const { id } = req.params;
   const {
     scientific_name,
